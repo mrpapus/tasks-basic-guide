@@ -1,41 +1,54 @@
 // My Tasks Basic
 
 // HTML Elements
-let goBtnEl = document.getElementById('go-btn');
-let menuEl = document.getElementById('menu');
-let tasksEl = document.getElementById('tasks');
+let goBtnEl = document.getElementById("go-btn");
+let menuEl = document.getElementById("menu");
+let tasksEl = document.getElementById("tasks");
+
+// global variables
+let tasks = [];
 
 // Go Btn - Menu Listener
-goBtnEl.addEventListener('click', goBtnHandler);
+goBtnEl.addEventListener("click", goBtnHandler);
 
 function goBtnHandler() {
   // Get Menu Selection
   let selection = menuEl.value;
 
-  if (selection === 'add') {
+  if (selection === "add") {
     addTask();
-  } else if (selection === 'toggle') {
+  } else if (selection === "toggle") {
     toggleTask();
-  } else if (selection === 'remove') {
+  } else if (selection === "remove") {
     removeTask();
-  } else if (selection === 'clear') {
+  } else if (selection === "clear") {
     clearAll();
   }
 }
 
 // MENU FUNCTIONS
 function addTask() {
-  console.log('Add Task');
+  let description = prompt("enter taks description");
+  tasks.push(newTask(description));
+  tasksEl.innerHTML = `task added: ${description}`;
 }
 
 function toggleTask() {
-  console.log('Toggle Task');
+  console.log("Toggle Task");
 }
 
 function removeTask() {
-  console.log('Remove Task');
+  console.log("Remove Task");
 }
 
 function clearAll() {
-  console.log('Clear All');
+  console.log("Clear All");
+}
+
+// helper funtions
+function newTask(taskDescription) {
+  return {
+    description: taskDescription,
+    completed: "",
+  };
 }
