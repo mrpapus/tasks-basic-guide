@@ -30,7 +30,7 @@ function goBtnHandler() {
 function addTask() {
   let description = prompt("enter taks description");
   tasks.push(newTask(description));
-  tasksEl.innerHTML = `task added: ${description}`;
+  displayAll();
 }
 
 function toggleTask() {
@@ -51,4 +51,21 @@ function newTask(taskDescription) {
     description: taskDescription,
     completed: "",
   };
+}
+
+function displayAll() {
+  let outputStr = "";
+  for (let n = 0; n < tasks.length; n++) {
+    outputStr += getTaskHTMLStr(tasks[n], n);
+  }
+  tasksEl.innerHTML = outputStr;
+}
+
+function getTaskHTMLStr(task, n) {
+  return `
+  <div>
+  ${n}: ${task.description}
+  </div>
+
+  `;
 }
