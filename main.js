@@ -6,8 +6,8 @@ let menuEl = document.getElementById("menu");
 let tasksEl = document.getElementById("tasks");
 
 // global variables
-let tasks = [];
-
+let tasks = loadTasks();
+displayAll();
 // Go Btn - Menu Listener
 goBtnEl.addEventListener("click", goBtnHandler);
 
@@ -30,6 +30,7 @@ function goBtnHandler() {
 function addTask() {
   let description = prompt("enter taks description");
   tasks.push(newTask(description));
+  saveTasks();
   displayAll();
 }
 
@@ -68,4 +69,14 @@ function getTaskHTMLStr(task, n) {
   </div>
 
   `;
+}
+
+//save
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+//load
+function loadTasks() {
+  let tasksStr = localStorage.getItem("tasks");
+  return JSON.parse(tasksStr) ?? [];
 }
