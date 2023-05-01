@@ -33,17 +33,35 @@ function addTask() {
   saveTasks();
   displayAll();
 }
-
+// toggele task completet
 function toggleTask() {
-  console.log("Toggle Task");
+  let index = prompt("enter number of task");
+  let task = tasks[index];
+  if (task.completed === "") {
+    task.completed = "completed";
+  } else {
+    task.completed = "";
+  }
+  saveTasks();
+  displayAll();
 }
-
+//remove task by index
 function removeTask() {
-  console.log("Remove Task");
+  let index = +prompt("enter number of task");
+  if (index >= 0 && index < tasks.length) {
+    //valid
+    tasks.splice(index, 1);
+    saveTasks();
+    displayAll();
+  } else {
+    alert("invalid task number");
+  }
 }
-
+//clear
 function clearAll() {
-  console.log("Clear All");
+  tasks = [];
+  saveTasks();
+  displayAll();
 }
 
 // helper funtions
@@ -64,7 +82,7 @@ function displayAll() {
 
 function getTaskHTMLStr(task, n) {
   return `
-  <div>
+  <div class="${task.completed}">
   ${n}: ${task.description}
   </div>
 
